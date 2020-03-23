@@ -26,10 +26,25 @@ class LocationDetailViewController: UIViewController {
             weatherLocation = WeatherLocation(name: "Current Location", latitude: 0.0, longitude: 0.0)
             weatherLocations.append(weatherLocation)
         }
-        
+        loadLocations()
         updateUserInterface()
         
         // Do any additional setup after loading the view.
+    }
+    
+    func loadLocations() {
+        guard let locationsEncoded = UserDefaults.standard.value(forKey: "weatherLocations") as? Data else{
+            print("Error: Could not load, ignore if first install")
+            return
+            
+        }
+        let decoder = JSONDecoder()
+        if let weatherLocations = try? decoder.decode(Array.self, from: locationsEncoded) as [WeatherLocation]{
+            self.weatherLocations = weatherLocations
+        } else{
+            print("ERROR: Could not decode from user defualts")
+            
+        }
     }
     
     func updateUserInterface() {
@@ -39,6 +54,7 @@ class LocationDetailViewController: UIViewController {
         summaryLabel.text = ""
         
     }
+        
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! LocationListViewController
