@@ -23,11 +23,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-HC-OEf">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-HC-OEf">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="eVr-59-FkK"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="About" id="6Bu-B8-k88"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="m5f-CX-A8q"/>
+                                    <barButtonItem style="plain" id="cYm-r0-KCa">
+                                        <pageControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="1dh-3c-cS2">
+                                            <rect key="frame" x="74" y="4" width="178" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="pageIndicatorTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="pageControlTapped:" destination="cqK-I3-qZy" eventType="valueChanged" id="4mc-oY-cg1"/>
+                                            </connections>
+                                        </pageControl>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="JX7-DZ-Ieh"/>
                                     <barButtonItem image="list.bullet" catalog="system" id="Hfv-24-PrC">
                                         <connections>
@@ -80,7 +94,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="kCf-HC-OEf" firstAttribute="leading" secondItem="rlz-hf-8Zc" secondAttribute="leading" id="78N-Te-S4D"/>
                             <constraint firstItem="Bhn-pB-owS" firstAttribute="top" secondItem="rlz-hf-8Zc" secondAttribute="top" id="Pct-Po-0TB"/>
+                            <constraint firstItem="kCf-HC-OEf" firstAttribute="bottom" secondItem="rlz-hf-8Zc" secondAttribute="bottom" id="Uu1-OW-tej"/>
+                            <constraint firstItem="kCf-HC-OEf" firstAttribute="trailing" secondItem="rlz-hf-8Zc" secondAttribute="trailing" id="Zfn-Vi-9X1"/>
                             <constraint firstItem="Bhn-pB-owS" firstAttribute="leading" secondItem="rlz-hf-8Zc" secondAttribute="leading" id="cBj-6r-KsF"/>
                             <constraint firstItem="Bhn-pB-owS" firstAttribute="trailing" secondItem="rlz-hf-8Zc" secondAttribute="trailing" id="mF2-d1-sYd"/>
                         </constraints>
@@ -89,6 +106,7 @@
                     <connections>
                         <outlet property="dateLabel" destination="gts-6B-OYx" id="5gd-Kc-pjI"/>
                         <outlet property="imageView" destination="bSD-Kc-9Uy" id="qb0-GD-Ofo"/>
+                        <outlet property="pageControl" destination="1dh-3c-cS2" id="d6W-dq-UfA"/>
                         <outlet property="placeLabel" destination="icN-9F-q1u" id="SJ8-Uu-pqG"/>
                         <outlet property="summaryLabel" destination="uvn-Xu-H2h" id="0m1-Xf-JDB"/>
                         <outlet property="temperatureLabel" destination="8my-vc-lQm" id="bTK-dL-ioJ"/>
