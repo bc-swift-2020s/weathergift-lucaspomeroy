@@ -123,12 +123,13 @@ class WeatherDetail: WeatherLocation{
                     self.dailyWeatherData.append(dailyWeather)
                     print("Day: \(dailyWeather.dailyWeekday) High: \(dailyWeather.dailyHigh) Low: \(dailyWeather.dailyLow)")
                 }
-                for index in 0..<result.hourly.data.count{
+                let lastHour = min(24, result.hourly.data.count)
+                for index in 0..<lastHour{
                     let hourlyDate = Date(timeIntervalSince1970: result.hourly.data[index].time)
                     hourlyFormatter.timeZone = TimeZone(identifier: result.timezone)
                     let hour = hourlyFormatter.string(from: hourlyDate)
                     let hourlyIcon = result.hourly.data[index].icon
-                    let hourlyPrecipProbability = Int((result.hourly.data[index].precipProbability * 100).rounded())
+                    let hourlyPrecipProbability = Int((result.hourly.data[index].precipProbability*100).rounded())
                     let hourlyTemperature = Int(result.hourly.data[index].temperature.rounded())
                     let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: hourlyTemperature, hourlyPrecipProbability: hourlyPrecipProbability)
                     self.hourlyWeatherData.append(hourlyWeather)
