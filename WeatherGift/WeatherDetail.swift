@@ -121,7 +121,7 @@ class WeatherDetail: WeatherLocation{
                     let dailyLow = Int(result.daily.data[index].temperatureLow.rounded())
                     let dailyWeather = DailyWeather(dailyIcon: dailyIcon, dailyWeekday: dailyWeekday, dailySummary: dailySummary, dailyHigh: dailyHigh, dailyLow: dailyLow)
                     self.dailyWeatherData.append(dailyWeather)
-                    print("Day: \(dailyWeather.dailyWeekday) High: \(dailyWeather.dailyHigh) Low: \(dailyWeather.dailyLow)")
+                    
                 }
                 let lastHour = min(24, result.hourly.data.count)
                 for index in 0..<lastHour{
@@ -133,7 +133,7 @@ class WeatherDetail: WeatherLocation{
                     let hourlyTemperature = Int(result.hourly.data[index].temperature.rounded())
                     let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: hourlyTemperature, hourlyPrecipProbability: hourlyPrecipProbability)
                     self.hourlyWeatherData.append(hourlyWeather)
-                    print("Hour: \(hourlyWeather.hour) Icon: \(hourlyWeather.hourlyIcon) Temp: \(hourlyWeather.hourlyTemperature) precipProb: \(hourlyWeather.hourlyPrecipProbability)")
+                    
                 }
                }catch{
                    print("JSON ERROR: \(error.localizedDescription)")

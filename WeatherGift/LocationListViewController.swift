@@ -34,9 +34,9 @@ class LocationListViewController: UIViewController {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(weatherLocations){
             UserDefaults.standard.set(encoded, forKey: "weatherLocations")
-            print("locations saved")
+            
         }else{
-            print("ERROR: Saving encoded failed")
+            
         }
     }
     
@@ -103,13 +103,23 @@ extension LocationListViewController: UITableViewDataSource, UITableViewDelegate
        weatherLocations.insert(itemToMove, at: destinationIndexPath.row)
        
    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row != 0 ? true : false
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row != 0 ? true : false
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return proposedDestinationIndexPath.row == 0 ? sourceIndexPath : proposedDestinationIndexPath
+    }
 }
     
 extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        print("Place name: \(place.name)")
-        print("Place ID: \(place.placeID)")
-        print("Place attributions: \(place.attributions)")
+       
         
         let newLocation = WeatherLocation(name: place.name ?? "unknown place", latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         weatherLocations.append(newLocation)
